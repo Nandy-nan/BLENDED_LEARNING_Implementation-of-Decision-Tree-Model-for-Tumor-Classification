@@ -30,59 +30,51 @@ Developed by: Nnandhana R
 RegisterNumber: 212223040124
 
 
-#Import necessary libraries
-
+/*
+Program to  implement a Decision Tree model for tumor classification.
+*/
+# Import the necessary libraries
 import pandas as pd
-
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-#Step 1: Data Loading
-
+# Step 1: Load the dataset
 data = pd.read_csv('tumor.csv')
 
-#Step 2: Data Exploration
-#Display the first few rows and column names for verification
+# Step 2: Explore the dataset
+# Display the first few rows and column names to verify the structure
 print(data.head())
 print(data.columns)
 
-#Step 3: Select features and target variable
+# Step 3: Select features and target variable
+# Drop 'id' and other non-feature columns, using 'diagnosis' as the target
+X = data.drop(columns=['Class'])  # Remove any irrelevant columns like 'id'
+y = data['Class']  # The target column indicating benign or malignant diagnosis
 
-#Drop id and other non-feature columns, using diagnosis as the target
-x = data.drop(columns=['Class']) # Remove any irrelevant columns
-y = data['Class'] # The target column indicating benign or malignant diagnosis
+# Step 4: Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
-#Step 4: Data Splitting
-
-X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=42)
-
-#Step 5: Model Training
-#Initialize and train the Decision Tree Classifier
-
+# Step 5: Initialize and train the Decision Tree model
+# Create a Decision Tree Classifier and fit it on the training data
 model = DecisionTreeClassifier(random_state=42)
 model.fit(X_train, y_train)
 
-#Step 6: Model Evaluation
-#Predicting on the test set
-
+# Step 6: Evaluate the model
+# Predict on the test set and evaluate the results
 y_pred = model.predict(X_test)
 
-#Calculate accuracy and print classification metrics
-
+# Print the accuracy and classification metrics for the model
 accuracy = accuracy_score(y_test, y_pred)
-print("NANDHANA R")
-print("212223040124")
 print("Accuracy:", accuracy)
 print("Classification Report:\n", classification_report(y_test, y_pred))
 
-#Confusion Matrix
-
+# Step 7: Visualize the Confusion Matrix
+# Generate a heatmap of the confusion matrix for better visualization
 conf_matrix = confusion_matrix(y_test, y_pred)
-
-sns.heatmap(conf_matrix, annot=True, fmt="d", cmap="YlOrRd")
+sns.heatmap(conf_matrix, annot=True, fmt="d", cmap="Blues")
 plt.xlabel("Predicted")
 plt.ylabel("Actual")
 plt.title("Confusion Matrix")
@@ -93,12 +85,14 @@ plt.show()
 ## Output:
 ![simple linear regression model for predicting the marks scored](sam.png)
 
+<img width="670" height="496" alt="image" src="https://github.com/user-attachments/assets/23eeedfd-dabb-4b2a-8bd1-22c30de5c794" />
 
-<img width="1096" height="648" alt="image" src="https://github.com/user-attachments/assets/d8a355ff-c0c0-4ee8-9a68-62de4bdfcd4d" />
+<img width="611" height="492" alt="image" src="https://github.com/user-attachments/assets/a36a90cc-a850-46f4-8c7a-46d86deaf529" />
 
-<img width="1096" height="648" alt="image" src="https://github.com/user-attachments/assets/3a8b3a2f-d548-4d8a-a736-1640dadbcd18" />
 
-<img width="943" height="576" alt="image" src="https://github.com/user-attachments/assets/e8f72a90-10a1-4232-ac61-16fa3e2ee546" />
+
+
+
 
 
 
